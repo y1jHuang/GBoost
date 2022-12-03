@@ -87,44 +87,48 @@ Then we use `GBoost_fit` for estimation.
 `adj_var` is a vector indexes the column of adjustment variables. If there are no adjustment variables, set it to `999`
 `stop_tol` is a minimum number of AIC/BIC's derivative. Iteration will not stop until reaches it.
 `gamma` is 
-`weighted` is an option to process $\pmb{X}$. If `'n'`, we normally average edges within each group; if `'lasso'`, we use Lasso algorithm to identify informative edges, and perform weighted average. `'boosting'` is similar.
+`weighted` is an option to process $\mathbf{X}$. If `'n'`, we normally average edges within each group; if `'lasso'`, we use Lasso algorithm to identify informative edges, and perform weighted average. `'boosting'` is similar.
 
 
 
 ## Algorithm
 
 **Data:** $\{ \mathbf{x}_i, y_i \} ^n_{i=1};$ number of iterations $M_1$ and $M_2$; updating rate $v$
+
 **Result:** $\{\lambda_g\}$ and $\{\omega_{j,k}\}$
+
 **begin**
-	Initialize $\lambda_g = 0 $, $g = 1,...,G$
-	Calculate the average of edges in sub-network $g$
-	**for** $g=1,...,G$ **do**
-		$\overline{\mathbf{X}}^{(g)} = m_g^{-1} \sum_{(j,k)\in I_g}\mathbf{X}^{(j,k)}$
-	**end**
-	Stage 1 of $L_2$ boosting algorithm:
-	**for** $m = 1,...,M_1$ **do**
-		**for** $g = 1,...,G$ **do**
-			Compute the first partial derivative with respect to $\lambda_g$
-			$L_1(g) = (\pmb{y}-\overline{\mathbf{X}}\pmb{\lambda} )^T \overline{\mathbf{X}}^{(g)} $
-		**end**
-		Find $g^* = \underset{1 \leq g \leq G}{\arg\max} \vert L_1(g) \vert $
-		Calculate the second partial derivative with respect to $g^*$
-		$L_2(g^*) = \parallel \overline{\mathbf{X}}^{(g^*)} \parallel ^2$
-		Update $\lambda_{g^*} = \lambda_{g^*} + v L_2(g^*)^{-1}L_1(g^*)$
-	**end**
-	Initialize $\omega_{j,k} = 0, (j, k) \in S = \bigcup_{g:\lambda_g \neq 0} I_g$
-	Filter out edges belong to irrelevant networks 
-	$\mathbf{X} = \{\mathbf{X}^{(j,k)}\}, (j, k) \in S = \bigcup_{g':\lambda_{g'} \neq 0} I_g$
-	Stage 2 of $L_2$ boosting algorithm:
-	**for** $m = 1,...,M_2$ **do**
-		**for** $(j,k)\in S$ **do**
-			Compute the first partial derivative with respect to ???????
-			$L_1(j, k) = (\pmb{y} - \mathbf{X}\pmb{\omega})^T \mathbf{X}$
-		**end**
-		Find $(j^*, k^*) = \underset{(j,k)\in S}{\arg\max} \vert L_1(j,k) \vert$
-		Calculate the second partial derivative with respect to $(j^*,k^*)$
-		$L_2(j^*,k^*) = \parallel \mathbf{X}^{(j^*,k^*)} \parallel ^2$
-		Update $\omega_{j^*, k^*} = \omega_{j^*, k^*} + v L_2(j^*, k^*)^{-1}L_1(j^*,k^*)$
-	**end**
+
+​	Initialize $\lambda_g = 0 $, $g = 1,...,G$
+
+​	Calculate the average of edges in sub-network $g$
+​	**for** $g=1,...,G$ **do**
+​		$\overline{\mathbf{X}}^{(g)} = m_g^{-1} \sum_{(j,k)\in I_g}\mathbf{X}^{(j,k)}$
+​	**end**
+​	Stage 1 of $L_2$ boosting algorithm:
+​	**for** $m = 1,...,M_1$ **do**
+​		**for** $g = 1,...,G$ **do**
+​			Compute the first partial derivative with respect to $\lambda_g$
+​			$L_1(g) = (\pmb{y}-\overline{\mathbf{X}}\pmb{\lambda} )^T \overline{\mathbf{X}}^{(g)} $
+​		**end**
+​		Find $g^* = \underset{1 \leq g \leq G}{\arg\max} \vert L_1(g) \vert $
+​		Calculate the second partial derivative with respect to $g^*$
+​		$L_2(g^*) = \parallel \overline{\mathbf{X}}^{(g^*)} \parallel ^2$
+​		Update $\lambda_{g^*} = \lambda_{g^*} + v L_2(g^*)^{-1}L_1(g^*)$
+​	**end**
+​	Initialize $\omega_{j,k} = 0, (j, k) \in S = \bigcup_{g:\lambda_g \neq 0} I_g$
+​	Filter out edges belong to irrelevant networks 
+​	$\mathbf{X} = \{\mathbf{X}^{(j,k)}\}, (j, k) \in S = \bigcup_{g':\lambda_{g'} \neq 0} I_g$
+​	Stage 2 of $L_2$ boosting algorithm:
+​	**for** $m = 1,...,M_2$ **do**
+​		**for** $(j,k)\in S$ **do**
+​			Compute the first partial derivative with respect to ???????
+​			$L_1(j, k) = (\pmb{y} - \mathbf{X}\pmb{\omega})^T \mathbf{X}$
+​		**end**
+​		Find $(j^*, k^*) = \underset{(j,k)\in S}{\arg\max} \vert L_1(j,k) \vert$
+​		Calculate the second partial derivative with respect to $(j^*,k^*)$
+​		$L_2(j^*,k^*) = \parallel \mathbf{X}^{(j^*,k^*)} \parallel ^2$
+​		Update $\omega_{j^*, k^*} = \omega_{j^*, k^*} + v L_2(j^*, k^*)^{-1}L_1(j^*,k^*)$
+​	**end**
 **end**
 
