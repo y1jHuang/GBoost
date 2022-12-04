@@ -79,17 +79,15 @@ where $\epsilon_i \sim \mathcal{N}(0, 1), x_{i,j} \sim \mathcal{N}(\pmb{\mu},1),
 
 Then we use `GBoost_fit` for estimation. 
 
-`data$X` is the input `X` which contains both adjustment variables and predictors. 
-`data$Y` is the response variable `Y`. 
-`data$group` is a factor indicates the group structure of predictors. 
-`totoal_steps` is the maximum number for iteration.
-`step_size` is step size $v$. Generally, it is better to use small step size, while takes longer time to process.
-`adj_var` is a vector indexes the column of adjustment variables. If there are no adjustment variables, set it to `999`
-`stop_tol` is a minimum number of AIC/BIC's derivative. Iteration will not stop until reaches it.
-`gamma` is 
+`data$X` is the input `X` which contains both adjustment variables and predictors.   
+`data$Y` is the response variable `Y`.   
+`data$group` is a factor indicates the group structure of predictors.  
+`totoal_steps` is the maximum number for iteration.  
+`step_size` is step size $v$. Generally, it is better to use small step size, while takes longer time to process.  
+`adj_var` is a vector indexes the column of adjustment variables. If there are no adjustment variables, set it to `999 `  
+`stop_tol` is a minimum number of AIC/BIC's derivative. Iteration will not stop until reaches it.  
+`gamma` is   
 `weighted` is an option to process $\mathbf{X}$. If `'n'`, we normally average edges within each group; if `'lasso'`, we use Lasso algorithm to identify informative edges, and perform weighted average. `'boosting'` is similar.
-
-
 
 ## Algorithm
 
