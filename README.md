@@ -93,7 +93,7 @@ Then we use `GBoost_fit` for estimation.
 
 ## Algorithm
 
-**Data:** $\{ \mathbf{x}\_i, y_i \} ^n_{i=1};$ number of iterations $M_1$ and $M_2$; updating rate $v$  
+**Data:** $\{ \mathbf{x}_i, y_i \} ^n_{i=1};$ number of iterations $M_1$ and $M_2$; updating rate $v$  
 **Result:** $\{\lambda_g\}$ and $\{\omega_{j,k}\}$  
 **begin**  
 	Initialize $\lambda_g = 0 $, $g = 1,...,G$  
@@ -107,10 +107,10 @@ Then we use `GBoost_fit` for estimation.
 ​			Compute the first partial derivative with respect to $\lambda_g$  
 ​			$L_1(g) = (\pmb{y}-\overline{\mathbf{X}}\pmb{\lambda} )^T \overline{\mathbf{X}}^{(g)} $  
 ​		**end**  
-​		Find $g^\* = \underset{1 \leq g \leq G}{\arg\max} \vert L_1(g) \vert $  
-​		Calculate the second partial derivative with respect to $g^\*$  
-​		$L_2(g^\*) = \parallel \overline{\mathbf{X}}^{(g^\*)} \parallel ^2$  
-​		Update $\lambda_{g^\*} = \lambda_{g^\*} + v L_2(g^\*)^{-1}L_1(g^\*)$  
+​		Find $g^* = \underset{1 \leq g \leq G}{\arg\max} \vert L_1(g) \vert $  
+​		Calculate the second partial derivative with respect to $g^*$  
+​		$L_2(g^*) = \parallel \overline{\mathbf{X}}^{(g^*)} \parallel ^2$  
+​		Update $\lambda_{g^*} = \lambda_{g^*} + v L_2(g^*)^{-1}L_1(g^*)$  
 ​	**end**  
 ​	Initialize $\omega_{j,k} = 0, (j, k) \in S = \bigcup_{g:\lambda_g \neq 0} I_g$  
 ​	Filter out edges belong to irrelevant networks  
@@ -121,10 +121,10 @@ Then we use `GBoost_fit` for estimation.
 ​			Compute the first partial derivative with respect to ???????  
 ​			$L_1(j, k) = (\pmb{y} - \mathbf{X}\pmb{\omega})^T \mathbf{X}$  
 ​		**end**  
-​		Find $(j^\*, k^\*) = \underset{(j,k)\in S}{\arg\max} \vert L_1(j,k) \vert$  
-​		Calculate the second partial derivative with respect to $(j^\*,k^\*)$  
-​		$L_2(j^\*,k^\*) = \parallel \mathbf{X}^{(j^\*,k^\*)} \parallel ^2$  
-​		Update $\omega_{j^\*, k^\*} = \omega_{j^\*, k^\*} + v L_2(j^\*, k^\*)^{-1}L_1(j^\*,k^\*)$  
+​		Find $(j^*, k^*) = \underset{(j,k)\in S}{\arg\max} \vert L_1(j,k) \vert$  
+​		Calculate the second partial derivative with respect to $(j^*,k^*)$  
+​		$L_2(j^*,k^*) = \parallel \mathbf{X}^{(j^*,k^*)} \parallel ^2$  
+​		Update $\omega_{j^*, k^*} = \omega_{j^*, k^*} + v L_2(j^*, k^*)^{-1}L_1(j^*,k^*)$  
 ​	**end**  
 **end**  
 
