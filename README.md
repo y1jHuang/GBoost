@@ -65,10 +65,7 @@ colnames(table) = c('GBoost','effect','group')
 
 ```
 
-Here is an example of `GBoost`. Using `simul_group_data()` function, we first simulate the data with assigned effect: $\pmb{\omega} = 
-\begin{pmatrix}
-5&5&0&0&0&5&0&\cdots&0
-\end{pmatrix}^\intercal$ 
+Here is an example of `GBoost`. Using `simul_group_data()` function, we first simulate the data with assigned effect: 
 $$
 \pmb{y} = \mathbf{X}\pmb{\omega} + \pmb{\epsilon}, 
 \pmb{\omega} = 
