@@ -34,38 +34,46 @@ Replace `#path` with the folder path where downloaded `GBoost` package located.
 
 ```R
 library(GBoost)
+library(glmnet)
+# Simulate data with the assigned effect
 data = simul_group_data(nodes = 6, n = 100, 
                         num.groups = 2, q.groups = 1,
                         sparse_g = 0, dense_g = 1, 
                         effect_size = 5)
-mdl = GBoost_fit(data$X, data$Y, data$group, 
-                 total_steps=5000, step_size=c(1e-2,1e-2), 
-                 adj_var = 999, stop_tol=-1e-5, gamma = 1, 
-                 lasso_lambda = 0.0314, weighted = 'n')
-table = cbind(mdl$beta, data$beta, data$group)
-colnames(table) = c('GBoost','effect','group')
+# Estimation by GBoost
+mdl.GBoost = GBoost_fit(data$X, data$Y, data$group, 
+                        total_steps=5000, step_size=c(1e-2,1e-2), 
+                        adj_var = 999, stop_tol=-1e-5, gamma = 1, 
+                        lasso_lambda = 0.0314, weighted = 'n')
+beta.GBoost = mdl.GBoost$beta
+
+# Estimation by Lasso
+mdl.lasso <- cv.glmnet(data$X, data$Y, alpha=1, parallel = FALSE)
+beta.lasso = as.vector(stats::coef(mdl.lasso, s="lambda.min"))[-1]
+
+table = cbind(beta.GBoost, beta.lasso, data$beta, data$group)
+colnames(table) = c('GBoost', 'Lasso', 'effect','group')
 
 > table
-        GBoost    effect    group
- [1,] 4.829109         5        1
- [2,] 5.302042         5        1
- [3,] 0.000000         0        2
- [4,] 0.000000         0        2
- [5,] 0.000000         0        2
- [6,] 5.168462         5        1
- [7,] 0.000000         0        2
- [8,] 0.000000         0        2
- [9,] 0.000000         0        2
-[10,] 0.000000         0        2
-[11,] 0.000000         0        2
-[12,] 0.000000         0        2
-[13,] 0.000000         0        3
-[14,] 0.000000         0        3
-[15,] 0.000000         0        3
-
+        GBoost       Lasso     effect     group
+ [1,] 4.829109  4.53929582          5         1
+ [2,] 5.302042  5.05273894          5         1
+ [3,] 0.000000  0.00000000          0         2
+ [4,] 0.000000 -0.09168638          0         2
+ [5,] 0.000000 -0.32576087          0         2
+ [6,] 5.168462  4.97995221          5         1
+ [7,] 0.000000 -0.18823506          0         2
+ [8,] 0.000000  0.00000000          0         2
+ [9,] 0.000000  0.13367415          0         2
+[10,] 0.000000 -0.07816475          0         2
+[11,] 0.000000  0.00000000          0         2
+[12,] 0.000000  0.00000000          0         2
+[13,] 0.000000 -0.35384280          0         3
+[14,] 0.000000  0.00000000          0         3
+[15,] 0.000000  0.00000000          0         3
 ```
 
-Here is an example of `GBoost`. Using `simul_group_data()` function, we first simulate the data with assigned effect: 
+Here is an example of `GBoost`. Using `simul_group_data()` function, we first simulate the data with assigned effect:
 $$
 \pmb{y} = \mathbf{X}\pmb{\omega} + \pmb{\epsilon}, 
 \pmb{\omega} = 
@@ -128,3 +136,4 @@ Then we use `GBoost_fit` for estimation.
 ​	**end**  
 **end**  
 
+![](http://latex.codecogs.com/svg.latex?\{ \mathbf{x}_i, y_i \} ^n_{i=1};)
