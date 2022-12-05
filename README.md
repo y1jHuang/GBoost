@@ -109,7 +109,7 @@ As it suggests, given 15 predictors clustered into 3 groups, `GBoost` can perfec
 &emsp; &emsp; **end**  
 &emsp; &emsp; Find $\hat{g} = \underset{1 \leq g \leq G}{\arg\max} \left\vert L_1(g) \right\vert $  
 &emsp; &emsp; Calculate the second partial derivative with respect to $\hat{g}$  
-&emsp; &emsp; $L_2(\hat{g}) = \left\Vert \overline{\mathbf{X}}^{(\hat{g})} \right\Vert ^2$  
+&emsp; &emsp; $L_2(\hat{g}) = \Vert \overline{\mathbf{X}}^{(\hat{g})} \Vert ^2$  
 &emsp; &emsp; Update $\lambda_{\hat{g}} = \lambda_{\hat{g}} + v L_2(\hat{g})^{-1}L_1(\hat{g})$  
 &emsp; **end**  
 &emsp; Initialize $\omega_{j,k} = 0, (j, k) \in S = \bigcup_{g:\lambda_g \neq 0} I_g$  
@@ -123,7 +123,7 @@ As it suggests, given 15 predictors clustered into 3 groups, `GBoost` can perfec
 &emsp; &emsp; **end**  
 &emsp; &emsp; Find $(\hat{j}, \hat{k}) = \underset{(j,k)\in S}{\arg\max} \left\vert L_1(j,k) \right\vert$  
 &emsp; &emsp; Calculate the second partial derivative with respect to $(\hat{j}, \hat{k})$  
-&emsp; &emsp; $L_2(\hat{j}, \hat{k}) = \left\Vert \mathbf{X}^{(\hat{j}, \hat{k})} \right\Vert^2$  
+&emsp; &emsp; $L_2(\hat{j}, \hat{k}) = \Vert \mathbf{X}^{(\hat{j}, \hat{k})} \Vert ^2$  
 &emsp; &emsp; Update $\omega_{\hat{j}, \hat{k}} = \omega_{\hat{j}, \hat{k}} + v L_2(\hat{j}, \hat{k})^{-1}L_1(\hat{j}, \hat{k})$  
 &emsp; **end**  
 **end**
