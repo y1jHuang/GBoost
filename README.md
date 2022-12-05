@@ -172,7 +172,7 @@ mdl.GBoost = GBoost_fit(data$X, data$Y, data$group, total_steps=5000,
 
 Estimate the data by implementing a two-stage $L_2$ boosting algorithm
 
-&emsp; $\pmb{\mathsf{PARAMETER}}$
+&emsp; $\pmb{\mathsf{PARAMETER}}$  
 &emsp; &emsp; `data$X`: the input `X` which contains both adjustment variables and predictors.   
 &emsp; &emsp; `data$Y`: the response variable `Y`.   
 &emsp; &emsp; `data$group`: a factor indicates the group structure of predictors.  
