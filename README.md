@@ -165,9 +165,9 @@ $$
 ### For estimation
 
 ```R
-mdl.GBoost = GBoost_fit(data$X, data$Y, data$group, total_steps=5000, 
-                        step_size=c(1e-2,1e-2), adj_var = 999, stop_tol=-1e-5, 
-                        gamma = 1, lasso_lambda = 0.0314, weighted = 'n')
+GBoost_fit(data$X, data$Y, data$group, total_steps=5000, 
+           step_size=c(1e-2,1e-2), adj_var = 999, stop_tol=-1e-5, 
+           gamma = 1, lasso_lambda = 0.0314, weighted = 'n')
 ```
 
 Estimate the data by implementing a two-stage $L_2$ boosting algorithm
