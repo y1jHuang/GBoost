@@ -104,17 +104,17 @@ Then we use `GBoost_fit` for estimation.
 **Data:** $\lbrace \mathbf x_i, y_i \rbrace ^n_{i=1};$ number of iterations $M_1$ and $M_2$; updating rate $v$  
 **Result:** $\lbrace\lambda_g\rbrace$ and $\lbrace\omega_{j,k}\rbrace$  
 **begin**  
-Initialize $\lambda_g = 0 $, $g = 1,...,G$  
-Calculate the average of edges in sub-network $g$  
-**for** $g=1,...,G$ **do**  
-$\overline{\mathbf X }^{(g)} = m_g^{-1} \sum_{(j,k)\in I_g} \mathbf X^{(j,k)}$  
-**end**  
-Stage 1 of $L_2$ boosting algorithm:  
-**for** $m = 1,...,M_1$ **do**  
-**for** $g = 1,...,G$ **do**  
-Compute the first partial derivative with respect to $\lambda_g$  
-$L_1(g) = (\pmb{y}-\overline{\mathbf{X}}\pmb{\lambda} )^T \overline{\mathbf{X}}^{(g)} $  
-**end**  
+&emsp; Initialize $\lambda_g = 0 $, $g = 1,...,G$  
+&emsp; Calculate the average of edges in sub-network $g$  
+&emsp; **for** $g=1,...,G$ **do**  
+&emsp; &emsp; $\overline{\mathbf X }^{(g)} = m_g^{-1} \sum_{(j,k)\in I_g} \mathbf X^{(j,k)}$  
+&emsp; **end**  
+&emsp; Stage 1 of $L_2$ boosting algorithm:  
+&emsp; **for** $m = 1,...,M_1$ **do**  
+&emsp; &emsp; **for** $g = 1,...,G$ **do**  
+&emsp; &emsp; &emsp; Compute the first partial derivative with respect to $\lambda_g$  
+&emsp; &emsp; &emsp; $L_1(g) = (\pmb{y}-\overline{\mathbf{X}}\pmb{\lambda} )^T \overline{\mathbf{X}}^{(g)} $  
+&emsp; &emsp; **end**  
 Find $\hat{g} = \underset{1 \leq g \leq G}{\arg\max} \left\vert L_1(g) \right\vert $  
 Calculate the second partial derivative with respect to $\hat{g}$  
 $L_2(\hat{g}) = \left\Vert \overline{\mathbf{X}}^{(\hat{g})} \right\Vert ^2$  
