@@ -59,7 +59,7 @@ For comparison, we also introduce `Lasso` to estimate the effect size:
 ```R
 library(glmnet)
 # Estimation by Lasso
-mdl.lasso <- cv.glmnet(data$X, data$Y, alpha=1, parallel = FALSE)
+mdl.lasso = cv.glmnet(data$X, data$Y, alpha=1, parallel = FALSE)
 beta.lasso = as.vector(stats::coef(mdl.lasso, s="lambda.min"))[-1]
 ```
 
