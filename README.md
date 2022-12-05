@@ -113,7 +113,7 @@ Then we use `GBoost_fit` for estimation.
 &emsp; **for** $m = 1,...,M_1$ **do**  
 &emsp; &emsp; **for** $g = 1,...,G$ **do**  
 &emsp;&emsp; &emsp; Compute the first partial derivative with respect to $\lambda_g$  
-&emsp;&emsp; &emsp; $L_1(g) = (\pmb{y}-\overline{\mathbf{X}}\pmb{\lambda} )^T \overline{\mathbf{X}}^{(g)} $  
+&emsp; &emsp; &emsp; $L_1(g) = (\pmb{y}-\overline{\mathbf{X}}\pmb{\lambda} )^T \overline{\mathbf{X}}^{(g)} $  
 &emsp; &emsp; **end**  
 &emsp; &emsp; Find $\hat{g} = \underset{1 \leq g \leq G}{\arg\max} \left\vert L_1(g) \right\vert $  
 &emsp; &emsp; Calculate the second partial derivative with respect to $\hat{g}$  
@@ -126,8 +126,8 @@ Then we use `GBoost_fit` for estimation.
 &emsp; Stage 2 of $L_2$ boosting algorithm:  
 &emsp; **for** $m = 1,...,M_2$ **do**  
 &emsp; &emsp; **for** $(j,k)\in S$ **do**  
-&emsp;&emsp; &emsp; Compute the first partial derivative with respect to ???????  
-&emsp;&emsp; &emsp; $L_1(j, k) = (\pmb{y} - \mathbf{X}\pmb{\omega})^T \mathbf{X}$  
+&emsp; &emsp; &emsp; Compute the first partial derivative with respect to ???????  
+&emsp; &emsp; &emsp; $L_1(j, k) = (\pmb{y} - \mathbf{X}\pmb{\omega})^T \mathbf{X}$  
 &emsp; &emsp; **end**  
 &emsp; &emsp; Find $(\hat{j}, \hat{k}) = \underset{(j,k)\in S}{\arg\max} \left\vert L_1(j,k) \right\vert$  
 &emsp; &emsp; Calculate the second partial derivative with respect to $(\hat{j}, \hat{k})$  
