@@ -115,25 +115,25 @@ Then we use `GBoost_fit` for estimation.
 &emsp; &emsp; &emsp; Compute the first partial derivative with respect to $\lambda_g$  
 &emsp; &emsp; &emsp; $L_1(g) = (\pmb{y}-\overline{\mathbf{X}}\pmb{\lambda} )^T \overline{\mathbf{X}}^{(g)} $  
 &emsp; &emsp; **end**  
-Find $\hat{g} = \underset{1 \leq g \leq G}{\arg\max} \left\vert L_1(g) \right\vert $  
-Calculate the second partial derivative with respect to $\hat{g}$  
-$L_2(\hat{g}) = \left\Vert \overline{\mathbf{X}}^{(\hat{g})} \right\Vert ^2$  
-Update $\lambda_{\hat{g}} = \lambda_{\hat{g}} + v L_2(\hat{g})^{-1}L_1(\hat{g})$  
-**end**  
-Initialize $\omega_{j,k} = 0, (j, k) \in S = \bigcup_{g:\lambda_g \neq 0} I_g$  
-Filter out edges belong to irrelevant networks  
-$\mathbf{X} = \lbrace\mathbf{X}^{(j,k)}\rbrace, (j, k) \in S = \bigcup_{g':\lambda_{g'} \neq 0} I_g$  
-Stage 2 of $L_2$ boosting algorithm:  
-**for** $m = 1,...,M_2$ **do**  
-**for** $(j,k)\in S$ **do**  
-Compute the first partial derivative with respect to ???????  
-$L_1(j, k) = (\pmb{y} - \mathbf{X}\pmb{\omega})^T \mathbf{X}$  
-**end**  
-Find $(\hat{j}, \hat{k}) = \underset{(j,k)\in S}{\arg\max} \left\vert L_1(j,k) \right\vert$  
-Calculate the second partial derivative with respect to $(\hat{j}, \hat{k})$  
-$L_2(\hat{j}, \hat{k}) = \left\Vert \mathbf{X}^{(\hat{j}, \hat{k})} \right\Vert^2$  
-Update $\omega_{\hat{j}, \hat{k}} = \omega_{\hat{j}, \hat{k}} + v L_2(\hat{j}, \hat{k})^{-1}L_1(\hat{j}, \hat{k})$  
-**end**  
+&emsp; &emsp; Find $\hat{g} = \underset{1 \leq g \leq G}{\arg\max} \left\vert L_1(g) \right\vert $  
+&emsp; &emsp; Calculate the second partial derivative with respect to $\hat{g}$  
+&emsp; &emsp; $L_2(\hat{g}) = \left\Vert \overline{\mathbf{X}}^{(\hat{g})} \right\Vert ^2$  
+&emsp; &emsp; Update $\lambda_{\hat{g}} = \lambda_{\hat{g}} + v L_2(\hat{g})^{-1}L_1(\hat{g})$  
+&emsp; **end**  
+&emsp; Initialize $\omega_{j,k} = 0, (j, k) \in S = \bigcup_{g:\lambda_g \neq 0} I_g$  
+&emsp; Filter out edges belong to irrelevant networks  
+&emsp; $\mathbf{X} = \lbrace\mathbf{X}^{(j,k)}\rbrace, (j, k) \in S = \bigcup_{g':\lambda_{g'} \neq 0} I_g$  
+&emsp; Stage 2 of $L_2$ boosting algorithm:  
+&emsp; **for** $m = 1,...,M_2$ **do**  
+&emsp; &emsp; **for** $(j,k)\in S$ **do**  
+&emsp; &emsp; &emsp; Compute the first partial derivative with respect to ???????  
+&emsp; &emsp; &emsp; $L_1(j, k) = (\pmb{y} - \mathbf{X}\pmb{\omega})^T \mathbf{X}$  
+&emsp; &emsp; **end**  
+&emsp; &emsp; Find $(\hat{j}, \hat{k}) = \underset{(j,k)\in S}{\arg\max} \left\vert L_1(j,k) \right\vert$  
+&emsp; &emsp; Calculate the second partial derivative with respect to $(\hat{j}, \hat{k})$  
+&emsp; &emsp; $L_2(\hat{j}, \hat{k}) = \left\Vert \mathbf{X}^{(\hat{j}, \hat{k})} \right\Vert^2$  
+&emsp; &emsp; Update $\omega_{\hat{j}, \hat{k}} = \omega_{\hat{j}, \hat{k}} + v L_2(\hat{j}, \hat{k})^{-1}L_1(\hat{j}, \hat{k})$  
+&emsp; **end**  
 **end**
 
 ## Functions
