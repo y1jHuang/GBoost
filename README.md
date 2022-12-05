@@ -130,7 +130,7 @@ As it suggests, given 15 predictors clustered into 3 groups, `GBoost` can perfec
 
 ## Functions
 
-#### For simulation
+### For simulation
 
 ```R
 simul_group_data(nodes = 6, n = 100, num.groups = 3, q.groups = 1,
@@ -139,7 +139,7 @@ simul_group_data(nodes = 6, n = 100, num.groups = 3, q.groups = 1,
 
 Simulate data that has an underlying group structure.
 
-&emsp; $\pmb{\mathsf{PARAMETERS}}$  
+&emsp; $\pmb{\mathsf{PARAMETER}}$  
 &emsp; &emsp; `node`: number of brain regions.  
 &emsp; &emsp; `n`: sample size of simulation.  
 &emsp; &emsp; `num.groups`: number of groups.  
@@ -162,7 +162,7 @@ $$
 
 &emsp; &emsp; where $\epsilon_i \sim \mathcal{N}(0, 1), \ x_{i,j} \sim \mathcal{N}(\pmb{\mu},1), \ \mu_{i,j} \sim \rm{Ber}(\lbrace -1, 1 \rbrace; \theta)$
 
-#### For estimation
+### For estimation
 
 ```R
 mdl.GBoost = GBoost_fit(data$X, data$Y, data$group, total_steps=5000, 
@@ -183,5 +183,5 @@ Estimate the data by implementing a two-stage $L_2$ boosting algorithm
 &emsp; &emsp; `gamma`: double value used to determine the penalty when using BIC as the stopping criteria   
 &emsp; &emsp; `weighted`: an option to process $\mathbf{X}$. If `'n'`, we normally average edges within each group; if `'lasso'`, we use Lasso algorithm to identify informative edges, and perform weighted average. `'boosting'` is similar.
 
-&emsp; $\pmb{\mathsf{MECHANISM}}$
+&emsp; $\pmb{\mathsf{MECHANISM}}$  
 &emsp; &emsp; Please view [#Algorithm](#Algorithm) for detailed information
