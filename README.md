@@ -63,7 +63,7 @@ mdl.lasso <- cv.glmnet(data$X, data$Y, alpha=1, parallel = FALSE)
 beta.lasso = as.vector(stats::coef(mdl.lasso, s="lambda.min"))[-1]
 ```
 
-## Brief Results from Simulation
+## Results from Simulation
 
 Finally, label the estimation with each method, and present the results:
 
