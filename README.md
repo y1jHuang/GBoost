@@ -4,7 +4,7 @@
 
 `GBoost` is a package implements variable screening via $L_2$ boosting algorithm in a scalar-on-network regression setting, where the network has underlying group structure. Compared to other linear methods, the algorithm is relatively fast with high performance, and can exploit sparsity in the input matrix `X`.
 
-The authors of `GBoost` are Emily L. Morris and Yingjie Huang, who are maintainers as well.
+The authors of `GBoost` are Yingjie Huang and Emily L. Morris, who are maintainers as well.
 
 ## Installation
 
