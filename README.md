@@ -107,7 +107,7 @@ Then we use `GBoost_fit` for estimation.
 &emsp; Initialize $\lambda_g = 0 $, $g = 1,...,G$  
 &emsp; Calculate the average of edges in sub-network $g$  
 &emsp; **for** $g=1,...,G$ **do**  
-&emsp;&emsp; $\overline{\mathbf X }^{(g)} = m_g^{-1} \sum_{(j,k)\in I_g}\mathbf X^{(j,k)}$  
+&emsp; &emsp; $\overline{\mathbf X }^{(g)} = m_g^{-1} \sum_{(j,k)\in I_g} \mathbf X^{(j,k)}$  
 &emsp; **end**  
 &emsp; Stage 1 of $L_2$ boosting algorithm:  
 &emsp; **for** $m = 1,...,M_1$ **do**  
