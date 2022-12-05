@@ -85,7 +85,7 @@ $$
 $$
 
 
-where $\epsilon_i \sim \mathcal{N}(0, 1), \ x_{i,j} \sim \mathcal{N}(\pmb{\mu},1), \ \mu_{i,j} \sim \rm{Ber}(x; \theta)$
+where $\epsilon_i \sim \mathcal{N}(0, 1), \ x_{i,j} \sim \mathcal{N}(\pmb{\mu},1), \ \mu_{i,j} \sim \rm{Ber}(\lbrace -1, 1 \rbrace; \theta)$
 
 Then we use `GBoost_fit` for estimation. 
 
@@ -104,34 +104,37 @@ Then we use `GBoost_fit` for estimation.
 **Data:** $\lbrace \mathbf x_i, y_i \rbrace ^n_{i=1};$ number of iterations $M_1$ and $M_2$; updating rate $v$  
 **Result:** $\{\lambda_g\}$ and $\{\omega_{j,k}\}$  
 **begin**  
-	Initialize $\lambda_g = 0 $, $g = 1,...,G$  
-	Calculate the average of edges in sub-network $g$  
-​	**for** $g=1,...,G$ **do**  
-​		$\overline{\mathbf{X}}^{(g)} = m_g^{-1} \sum_{(j,k)\in I_g}\mathbf{X}^{(j,k)}$  
-​	**end**  
-​	Stage 1 of $L_2$ boosting algorithm:  
-​	**for** $m = 1,...,M_1$ **do**  
-​		**for** $g = 1,...,G$ **do**  
-​			Compute the first partial derivative with respect to $\lambda_g$  
-​			$L_1(g) = (\pmb{y}-\overline{\mathbf{X}}\pmb{\lambda} )^T \overline{\mathbf{X}}^{(g)} $  
-​		**end**  
-​		Find $\hat{g} = \underset{1 \leq g \leq G}{\arg\max} \vert L_1(g) \vert $  
-​		Calculate the second partial derivative with respect to $\hat{g}$  
-​		$L_2(\hat{g}) = \parallel \overline{\mathbf{X}}^{(\hat{g})} \parallel ^2$  
-​		Update $\lambda_{\hat{g}} = \lambda_{\hat{g}} + v L_2(\hat{g})^{-1}L_1(\hat{g})$  
-​	**end**  
-​	Initialize $\omega_{j,k} = 0, (j, k) \in S = \bigcup_{g:\lambda_g \neq 0} I_g$  
-​	Filter out edges belong to irrelevant networks  
-​	$\mathbf{X} = \{\mathbf{X}^{(j,k)}\}, (j, k) \in S = \bigcup_{g':\lambda_{g'} \neq 0} I_g$  
-​	Stage 2 of $L_2$ boosting algorithm:  
-​	**for** $m = 1,...,M_2$ **do**  
-​		**for** $(j,k)\in S$ **do**  
-​			Compute the first partial derivative with respect to ???????  
-​			$L_1(j, k) = (\pmb{y} - \mathbf{X}\pmb{\omega})^T \mathbf{X}$  
-​		**end**  
-​		Find $(\hat{j}, \hat{k}) = \underset{(j,k)\in S}{\arg\max} \vert L_1(j,k) \vert$  
-​		Calculate the second partial derivative with respect to $(\hat{j}, \hat{k})$  
-​		$L_2(\hat{j}, \hat{k}) = \parallel \mathbf{X}^{(\hat{j}, \hat{k})} \parallel ^2$  
-​		Update $\omega_{\hat{j}, \hat{k}} = \omega_{\hat{j}, \hat{k}} + v L_2(\hat{j}, \hat{k})^{-1}L_1(\hat{j}, \hat{k})$  
-​	**end**  
+		Initialize $\lambda_g = 0 $, $g = 1,...,G$  
+		Calculate the average of edges in sub-network $g$  
+		**for** $g=1,...,G$ **do**  
+				$\overline{\mathbf{X}}^{(g)} = m_g^{-1} \sum_{(j,k)\in I_g}\mathbf{X}^{(j,k)}$  
+		**end**  
+		Stage 1 of $L_2$ boosting algorithm:  
+		**for** $m = 1,...,M_1$ **do**  
+				**for** $g = 1,...,G$ **do**  
+						Compute the first partial derivative with respect to $\lambda_g$  
+						$L_1(g) = (\pmb{y}-\overline{\mathbf{X}}\pmb{\lambda} )^T \overline{\mathbf{X}}^{(g)} $  
+				**end**  
+				Find $\hat{g} = \underset{1 \leq g \leq G}{\arg\max} \left\vert L_1(g) \right\vert $  
+				Calculate the second partial derivative with respect to $\hat{g}$  
+				$L_2(\hat{g}) = \left\Vert \overline{\mathbf{X}}^{(\hat{g})} \right\Vert ^2$  
+				Update $\lambda_{\hat{g}} = \lambda_{\hat{g}} + v L_2(\hat{g})^{-1}L_1(\hat{g})$  
+		**end**  
+		Initialize $\omega_{j,k} = 0, (j, k) \in S = \bigcup_{g:\lambda_g \neq 0} I_g$  
+		Filter out edges belong to irrelevant networks  
+		$\mathbf{X} = \{\mathbf{X}^{(j,k)}\}, (j, k) \in S = \bigcup_{g':\lambda_{g'} \neq 0} I_g$  
+		Stage 2 of $L_2$ boosting algorithm:  
+		**for** $m = 1,...,M_2$ **do**  
+				**for** $(j,k)\in S$ **do**  
+						Compute the first partial derivative with respect to ???????  
+						$L_1(j, k) = (\pmb{y} - \mathbf{X}\pmb{\omega})^T \mathbf{X}$  
+				**end**  
+				Find $(\hat{j}, \hat{k}) = \underset{(j,k)\in S}{\arg\max} \left\vert L_1(j,k) \right\vert$  
+				Calculate the second partial derivative with respect to $(\hat{j}, \hat{k})$  
+				$L_2(\hat{j}, \hat{k}) = \left\Vert \mathbf{X}^{(\hat{j}, \hat{k})} \right\Vert^2$  
+				Update $\omega_{\hat{j}, \hat{k}} = \omega_{\hat{j}, \hat{k}} + v L_2(\hat{j}, \hat{k})^{-1}L_1(\hat{j}, \hat{k})$  
+		**end**  
 **end**
+
+## Functions
+
