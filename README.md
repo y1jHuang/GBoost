@@ -75,17 +75,13 @@ colnames(table) = c('GBoost', 'Lasso', 'effect','group')
 
 Here is an example of `GBoost`. Using `simul_group_data()` function, we first simulate the data with assigned effect:
 $$
-\pmb{y} = \mathbf{X}\pmb{\omega} + \pmb{\epsilon}, 
+\pmb{y} = \mathbf{X}\pmb{\omega} + \pmb{\epsilon},\
 \pmb{\omega} = 
 \begin{pmatrix}
 5&5&0&0&0&5&0&\cdots&0
 \end{pmatrix}^\intercal
 $$
-where $\epsilon_i \sim \mathcal{N}(0, 1), x_{i,j} \sim \mathcal{N}(\pmb{\mu},1), \ \mu_{i,j} \sim \rm{Ber}(x; 0.3),\
-\rm{Ber}(x;\theta) = \left\{ \begin{array}{rcl} 
-\theta & \mbox{if} & x = 1\\
-1-\theta & \mbox{if} & x = -1\\
-\end{array}\right.$
+where $\epsilon_i \sim \mathcal{N}(0, 1), \ x_{i,j} \sim \mathcal{N}(\pmb{\mu},1), \ \mu_{i,j} \sim \rm{Ber}(x; \theta)$
 
 Then we use `GBoost_fit` for estimation. 
 
