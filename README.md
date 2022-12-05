@@ -101,7 +101,7 @@ Then we use `GBoost_fit` for estimation.
 
 ## Algorithm
 
-**Data:** $\lbrace \mathbf{x}_i, y_i \rbrace ^n_{i=1};$ number of iterations $M_1$ and $M_2$; updating rate $v$  
+**Data:** $\lbrace \mathbf x_i, y_i \rbrace ^n_{i=1};$ number of iterations $M_1$ and $M_2$; updating rate $v$  
 **Result:** $\{\lambda_g\}$ and $\{\omega_{j,k}\}$  
 **begin**  
 	Initialize $\lambda_g = 0 $, $g = 1,...,G$  
