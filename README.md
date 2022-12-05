@@ -102,13 +102,13 @@ Then we use `GBoost_fit` for estimation.
 ## Algorithm
 
 **Data:** $\lbrace \mathbf x_i, y_i \rbrace ^n_{i=1};$ number of iterations $M_1$ and $M_2$; updating rate $v$  
-**Result:** $\{\lambda_g\}$ and $\{\omega_{j,k}\}$  
+**Result:** $\lbrace\lambda_g\rbrace$ and $\lbrace\omega_{j,k}\rbrace$  
 **begin**  
-		Initialize $\lambda_g = 0 $, $g = 1,...,G$  
-		Calculate the average of edges in sub-network $g$  
-		**for** $g=1,...,G$ **do**  
-				$\overline{\mathbf{X}}^{(g)} = m_g^{-1} \sum_{(j,k)\in I_g}\mathbf{X}^{(j,k)}$  
-		**end**  
+&emsp;Initialize $\lambda_g = 0 $, $g = 1,...,G$  
+&emsp;Calculate the average of edges in sub-network $g$  
+&emsp;**for** $g=1,...,G$ **do**  
+&emsp;&emsp;$\overline{\mathbf{X}}^{(g)} = m_g^{-1} \sum_{(j,k)\in I_g}\mathbf{X}^{(j,k)}$  
+&emsp;**end**  
 		Stage 1 of $L_2$ boosting algorithm:  
 		**for** $m = 1,...,M_1$ **do**  
 				**for** $g = 1,...,G$ **do**  
@@ -122,7 +122,7 @@ Then we use `GBoost_fit` for estimation.
 		**end**  
 		Initialize $\omega_{j,k} = 0, (j, k) \in S = \bigcup_{g:\lambda_g \neq 0} I_g$  
 		Filter out edges belong to irrelevant networks  
-		$\mathbf{X} = \{\mathbf{X}^{(j,k)}\}, (j, k) \in S = \bigcup_{g':\lambda_{g'} \neq 0} I_g$  
+		$\mathbf{X} = \lbrace\mathbf{X}^{(j,k)}\rbrace, (j, k) \in S = \bigcup_{g':\lambda_{g'} \neq 0} I_g$  
 		Stage 2 of $L_2$ boosting algorithm:  
 		**for** $m = 1,...,M_2$ **do**  
 				**for** $(j,k)\in S$ **do**  
