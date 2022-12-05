@@ -32,28 +32,44 @@ Replace `#path` with the folder path where downloaded `GBoost` package located.
 
 ## Quick Start
 
+First, we import `GBoost` package, and simulate data with the assigned effect size:
+
 ```R
 library(GBoost)
-library(glmnet)
 # Simulate data with the assigned effect
 data = simul_group_data(nodes = 6, n = 100, 
-                        num.groups = 2, q.groups = 1,
+                        num.groups = 3, q.groups = 1,
                         sparse_g = 0, dense_g = 1, 
                         effect_size = 5)
+```
+
+We then perform estimation with `GBoost_fit()`
+
+```R
 # Estimation by GBoost
 mdl.GBoost = GBoost_fit(data$X, data$Y, data$group, 
                         total_steps=5000, step_size=c(1e-2,1e-2), 
                         adj_var = 999, stop_tol=-1e-5, gamma = 1, 
                         lasso_lambda = 0.0314, weighted = 'n')
 beta.GBoost = mdl.GBoost$beta
+```
 
+For comparison, we also introduce `Lasso` to estimate the effect size:
+
+```R
+library(glmnet)
 # Estimation by Lasso
 mdl.lasso <- cv.glmnet(data$X, data$Y, alpha=1, parallel = FALSE)
 beta.lasso = as.vector(stats::coef(mdl.lasso, s="lambda.min"))[-1]
+```
 
+## Brief results
+
+Finally, label the estimation with each method, and present the results:
+
+```R
 table = cbind(beta.GBoost, beta.lasso, data$beta, data$group)
 colnames(table) = c('GBoost', 'Lasso', 'effect','group')
-
 > table
         GBoost       Lasso     effect     group
  [1,] 4.829109  4.53929582          5         1
@@ -73,31 +89,7 @@ colnames(table) = c('GBoost', 'Lasso', 'effect','group')
 [15,] 0.000000  0.00000000          0         3
 ```
 
-Here is an example of `GBoost`. Using `simul_group_data()` function, we first simulate the data with assigned effect:
-
-
-$$
-\pmb y = \mathbf X \pmb \omega + \pmb \epsilon,~
-\pmb \omega = 
-\begin{pmatrix}
-5&5&0&0&0&5&0&\cdots&0
-\end{pmatrix}^\intercal
-$$
-
-
-where $\epsilon_i \sim \mathcal{N}(0, 1), \ x_{i,j} \sim \mathcal{N}(\pmb{\mu},1), \ \mu_{i,j} \sim \rm{Ber}(\lbrace -1, 1 \rbrace; \theta)$
-
-Then we use `GBoost_fit` for estimation. 
-
-`data$X` is the input `X` which contains both adjustment variables and predictors.   
-`data$Y` is the response variable `Y`.   
-`data$group` is a factor indicates the group structure of predictors.  
-`totoal_steps` is the maximum number for iteration.  
-`step_size` is step size $v$. Generally, it is better to use small step size, while takes longer time to process.  
-`adj_var` is a vector indexes the column of adjustment variables. If there are no adjustment variables, set it to `999 `  
-`stop_tol` is a minimum number of AIC/BIC's derivative. Iteration will not stop until reaches it.  
-`gamma` is   
-`weighted` is an option to process $\mathbf{X}$. If `'n'`, we normally average edges within each group; if `'lasso'`, we use Lasso algorithm to identify informative edges, and perform weighted average. `'boosting'` is similar.
+As it suggests, given 15 predictors clustered into 3 groups, `GBoost` can perfectly estimate their effect size. In contrast, `Lasso` failed to perform variable screening, preserving many nuisance predictors.
 
 ## Algorithm
 
@@ -138,3 +130,58 @@ Then we use `GBoost_fit` for estimation.
 
 ## Functions
 
+#### For simulation
+
+```R
+simul_group_data(nodes = 6, n = 100, num.groups = 3, q.groups = 1,
+                        sparse_g = 0, dense_g = 1, effect_size = 5)
+```
+
+Simulate data that has an underlying group structure.
+
+&emsp; $\pmb{\mathsf{PARAMETERS}}$  
+&emsp; &emsp; `node`: number of brain regions.  
+&emsp; &emsp; `n`: sample size of simulation.  
+&emsp; &emsp; `num.groups`: number of groups.  
+&emsp; &emsp; `q.groups`: number of informative groups.  
+&emsp; &emsp; `sparse_g`: number of sparse groups, whose edges are not all informative.  
+&emsp; &emsp; `dense_g`: number of dense groups, whose edges are all informative.  
+&emsp; &emsp; `effect_size`: size effect of edges.
+
+&emsp; $\pmb{\mathsf{MECHANISM}}$  
+&emsp; &emsp; Simulate the data with assigned effect:
+
+$$
+\pmb y = \mathbf X \pmb \omega + \pmb \epsilon,~
+\pmb \omega = 
+\begin{pmatrix}
+5&5&0&0&0&5&0&\cdots&0
+\end{pmatrix}^\intercal
+$$
+
+
+&emsp; &emsp; where $\epsilon_i \sim \mathcal{N}(0, 1), \ x_{i,j} \sim \mathcal{N}(\pmb{\mu},1), \ \mu_{i,j} \sim \rm{Ber}(\lbrace -1, 1 \rbrace; \theta)$
+
+#### For estimation
+
+```R
+mdl.GBoost = GBoost_fit(data$X, data$Y, data$group, total_steps=5000, 
+                        step_size=c(1e-2,1e-2), adj_var = 999, stop_tol=-1e-5, 
+                        gamma = 1, lasso_lambda = 0.0314, weighted = 'n')
+```
+
+Estimate the data by implementing a two-stage $L_2$ boosting algorithm
+
+&emsp; $\pmb{\mathsf{PARAMETER}}$
+&emsp; &emsp; `data$X`: the input `X` which contains both adjustment variables and predictors.   
+&emsp; &emsp; `data$Y`: the response variable `Y`.   
+&emsp; &emsp; `data$group`: a factor indicates the group structure of predictors.  
+&emsp; &emsp; `totoal_steps`: the maximum number for iteration.  
+&emsp; &emsp; `step_size`: step size $v$. Generally, it is better to use small step size, while takes longer time to process.  
+&emsp; &emsp; `adj_var`: a vector indexes the column of adjustment variables. If there are no adjustment variables, set it to `999 `  
+&emsp; &emsp; `stop_tol`: a minimum number of AIC/BIC's derivative. Iteration will not stop until reaches it.  
+&emsp; &emsp; `gamma`: double value used to determine the penalty when using BIC as the stopping criteria   
+&emsp; &emsp; `weighted`: an option to process $\mathbf{X}$. If `'n'`, we normally average edges within each group; if `'lasso'`, we use Lasso algorithm to identify informative edges, and perform weighted average. `'boosting'` is similar.
+
+&emsp; $\pmb{\mathsf{MECHANISM}}$
+&emsp; &emsp; Please view [#Algorithm](#Algorithm) for detailed information
