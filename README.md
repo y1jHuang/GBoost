@@ -37,10 +37,8 @@ First, we import `GBoost` package, and simulate data with the assigned effect si
 ```R
 library(GBoost)
 # Simulate data with the assigned effect
-data = simul_group_data(nodes = 6, n = 100, 
-                        num.groups = 3, q.groups = 1,
-                        sparse_g = 0, dense_g = 1, 
-                        effect_size = 5)
+data = simul_group_data(nodes = 6, n = 100, num.groups = 3, q.groups = 1,
+                        sparse_g = 0, dense_g = 1, effect_size = 5)
 ```
 
 We then perform estimation with `GBoost_fit()`
