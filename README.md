@@ -116,7 +116,7 @@ As it suggests, given 15 predictors clustered into 3 groups, `GBoost` can perfec
 &emsp; Stage 2 of $L_2$ boosting algorithm:  
 &emsp; **for** $m = 1,...,M_2$ **do**  
 &emsp; &emsp; **for** $(j,k)\in S$ **do**  
-&emsp; &emsp; &emsp; Compute the first partial derivative with respect to ???????  
+&emsp; &emsp; &emsp; Compute the first partial derivative with respect to $\omega_{j,k}$  
 &emsp; &emsp; &emsp; $L_1(j, k) = (\pmb{y} - \mathbf{X}\pmb{\omega})^T \mathbf{X}$  
 &emsp; &emsp; **end**  
 &emsp; &emsp; Find $(\hat{j}, \hat{k}) = \underset{(j,k)\in S}{\arg\max} \left\vert L_1(j,k) \right\vert$  
