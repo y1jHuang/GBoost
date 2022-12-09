@@ -37,7 +37,7 @@ First, we import `GBoost` package, and simulate data with the assigned effect si
 ```R
 library(GBoost)
 # Simulate data with the assigned effect
-data = simul_group_data(nodes = 6, n = 100, num.groups = 3, q.groups = 1,
+data = simul_group_data(nodes = 6, n = 100, num.network = 2, q.groups = 1,
                         sparse_g = 0, dense_g = 1, effect_size = 5)
 ```
 
@@ -131,11 +131,14 @@ As it suggests, given 15 predictors clustered into 3 groups, `GBoost` can perfec
 ### For simulation
 
 ```R
-simul_group_data(nodes = 6, n = 100, num.groups = 3, q.groups = 1,
+simul_group_data(nodes = 6, n = 100, num.network = 2, q.groups = 1,
                         sparse_g = 0, dense_g = 1, effect_size = 5)
 ```
 
 Simulate data that has an underlying group structure.
+
+We construct a adjacency matrix that represents the connection between regions. These regions can be clustered into two functional networks due to their similarity. Thus, we can acquire $3$ groups and $\tbinom{6}{2} = 15$ edges (region pairs).
+<img src="fig/adjMat.svg" width="500px"/>
 
 &emsp; $\pmb{\mathsf{PARAMETER}}$  
 &emsp; &emsp; `node`: number of brain regions.  
