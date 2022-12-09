@@ -138,7 +138,7 @@ simul_group_data(nodes = 6, n = 100, num.network = 2, q.groups = 1,
 Simulate data that has an underlying group structure.
 
 We construct a adjacency matrix that represents the connection between regions. These regions can be clustered into two functional networks due to their similarity. Thus, we can acquire $3$ groups and $\tbinom{6}{2} = 15$ edges (region pairs).
-<img src="fig/adjMat.svg" width="500px"/>
+<img src="adjMat.svg" width="500px"/>
 
 &emsp; $\pmb{\mathsf{PARAMETER}}$  
 &emsp; &emsp; `node`: number of brain regions.  
