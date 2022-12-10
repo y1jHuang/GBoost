@@ -175,11 +175,11 @@ GBoost_fit(data$X, data$Y, data$group, total_steps=5000,
 &emsp; &emsp; `data$Y`: the response variable `Y`.   
 &emsp; &emsp; `data$group`: a factor indicates the group structure of predictors.  
 &emsp; &emsp; `totoal_steps`: the maximum number for iteration.  
-&emsp; &emsp; `step_size`: step size $v$. Generally, it is better to use small step size, while takes longer time to process.  
+&emsp; &emsp; `step_size`: a `vector` contains step size $v$ for each stage. Generally, it is better to use small step size, while takes longer time to &emsp; &emsp; process.  
 &emsp; &emsp; `adj_var`: a vector indexes the column of adjustment variables. If there are no adjustment variables, set it to `999 `  
-&emsp; &emsp; `stop_tol`: a minimum number of AIC/BIC's derivative. Iteration will not stop until reaches it.  
+&emsp; &emsp; `stop_tol`: a minimum number of the AIC/BIC's change rate. Iteration will not stop until reaches it.  
 &emsp; &emsp; `gamma`: double value used to determine the penalty when using BIC as the stopping criteria   
-&emsp; &emsp; `weighted`: an option to process $\mathbf{X}$. If `'n'`, we normally average edges within each group; if `'lasso'`, we use Lasso algorithm to identify informative edges, and perform weighted average. `'boosting'` is similar.
+&emsp; &emsp; `weighted`: an option to process $\mathbf{X}$. If `'n'`, we normally average edges within each group; if `'lasso'`, we use Lasso algorithm to &emsp; &emsp; identify informative edges, and perform weighted average. `'boosting'` is similar.
 
 &emsp; $\pmb{\mathsf{MECHANISM}}$  
 &emsp; &emsp; Please view [#Algorithm](#Algorithm) for detailed information
