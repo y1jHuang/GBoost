@@ -144,7 +144,7 @@ We construct a adjacency matrix that represents the connection between regions. 
 &emsp; $\pmb{\mathsf{PARAMETER}}$  
 &emsp; &emsp; `node`: number of brain regions.  
 &emsp; &emsp; `n`: sample size of simulation.  
-&emsp; &emsp; `num.groups`: number of groups.  
+&emsp; &emsp; `num.network`: number of groups.  
 &emsp; &emsp; `q.groups`: number of informative groups.  
 &emsp; &emsp; `sparse_g`: number of sparse groups, whose edges are not all informative.  
 &emsp; &emsp; `dense_g`: number of dense groups, whose edges are all informative.  
