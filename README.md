@@ -60,6 +60,7 @@ library(glmnet)
 mdl.lasso = cv.glmnet(data$X, data$Y, alpha=1, parallel = FALSE)
 beta.lasso = as.vector(stats::coef(mdl.lasso, s="lambda.min"))[-1]
 ```
+To search for help of these functions, please view [Functions](#Functions)
 
 ## Results from Simulation
 
