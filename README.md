@@ -32,7 +32,7 @@ Replace `#path` with the folder path where downloaded `GBoost` package located.
 
 ## Quick Start
 
-First, we import `GBoost` package, and simulate data with the assigned effect size:
+First, we import `GBoost` package, and simulate data with the assigned effect size `effect_size = 5`:
 
 ```R
 library(GBoost)
@@ -60,7 +60,7 @@ library(glmnet)
 mdl.lasso = cv.glmnet(data$X, data$Y, alpha=1, parallel = FALSE)
 beta.lasso = as.vector(stats::coef(mdl.lasso, s="lambda.min"))[-1]
 ```
-To search for help of these functions, please view [Functions](#Functions)
+To search for detailed illustration of these functions, please view [Functions](#Functions)
 
 ## Results from Simulation
 
@@ -132,13 +132,11 @@ As it suggests, given 15 predictors clustered into 3 groups, `GBoost` can perfec
 ### For simulation
 
 ```R
+# Simulate data that has an underlying group structure.
 simul_group_data(nodes = 6, n = 100, num.network = 2, q.groups = 1,
                         sparse_g = 0, dense_g = 1, effect_size = 5)
 ```
-
-Simulate data that has an underlying group structure.
-
-We construct a adjacency matrix that represents the connection between regions. These regions can be clustered into two functional networks due to their similarity. Thus, we can acquire $3$ groups and $\tbinom{6}{2} = 15$ edges (region pairs).
+This function can construct a adjacency matrix that represents the connection between regions. In this example, `nodes = 6` regions can be clustered into `num.network = 2` functional networks due to their similarity. Thus, we can acquire values of $3$ groups (network pairs) and $\tbinom{6}{2} = 15$ edges (region pairs).
 
 <img src="https://user-images.githubusercontent.com/115483486/206831134-b9571eaf-a266-4234-92ec-2edc56749187.svg" width="400px"/>
 
@@ -152,7 +150,7 @@ We construct a adjacency matrix that represents the connection between regions. 
 &emsp; &emsp; `effect_size`: size effect of edges.
 
 &emsp; $\pmb{\mathsf{MECHANISM}}$  
-&emsp; &emsp; Simulate the data with assigned effect:
+&emsp; &emsp; Simulate the data with assigned effect `effect_size = 5`:
 
 $$
 \pmb y = \mathbf X \pmb \omega + \pmb \epsilon,~
@@ -162,19 +160,16 @@ $$
 \end{pmatrix}^\intercal
 $$
 
-
 &emsp; &emsp; where $\epsilon_i \sim \mathcal{N}(0, 1), \ x_{i,j} \sim \mathcal{N}(\pmb{\mu},1), \ \mu_{i,j} \sim \rm{Ber}(\lbrace -1, 1 \rbrace; \theta)$
 
 ### For estimation
 
 ```R
+# Estimate the data by implementing a two-stage $L_2$ boosting algorithm
 GBoost_fit(data$X, data$Y, data$group, total_steps=5000, 
            step_size=c(1e-2,1e-2), adj_var = 999, stop_tol=-1e-5, 
            gamma = 1, lasso_lambda = 0.0314, weighted = 'n')
 ```
-
-Estimate the data by implementing a two-stage $L_2$ boosting algorithm
-
 &emsp; $\pmb{\mathsf{PARAMETER}}$  
 &emsp; &emsp; `data$X`: the input `X` which contains both adjustment variables and predictors.   
 &emsp; &emsp; `data$Y`: the response variable `Y`.   
