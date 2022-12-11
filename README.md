@@ -136,14 +136,14 @@ As it suggests, given 15 predictors clustered into 3 groups, `GBoost` can perfec
 simul_group_data(nodes = 6, n = 100, num.network = 2, q.groups = 1,
                         sparse_g = 0, dense_g = 1, effect_size = 5)
 ```
-This function can construct a adjacency matrix that represents the connection between regions. In this example, `nodes = 6` regions can be clustered into `num.network = 2` functional networks due to their similarity. Thus, we can acquire values of $3$ groups (network pairs) and $\tbinom{6}{2} = 15$ edges (region pairs).
+This function can construct a adjacency matrix that represents the connection between regions. In this example, `nodes = 6` regions can be clustered into `num.network = 2` functional networks due to their similarity. Thus, we can acquire values of $\tbinom{3}{2} = 3$ groups (network pairs) and $\tbinom{6}{2} = 15$ edges (region pairs).
 
 <img src="https://user-images.githubusercontent.com/115483486/206831134-b9571eaf-a266-4234-92ec-2edc56749187.svg" width="400px"/>
 
 &emsp; $\pmb{\mathsf{PARAMETER}}$  
 &emsp; &emsp; `node`: number of brain regions.  
 &emsp; &emsp; `n`: sample size of simulation.  
-&emsp; &emsp; `num.network`: number of groups.  
+&emsp; &emsp; `num.network`: number of networks.  
 &emsp; &emsp; `q.groups`: number of informative groups.  
 &emsp; &emsp; `sparse_g`: number of sparse groups, whose edges are not all informative.  
 &emsp; &emsp; `dense_g`: number of dense groups, whose edges are all informative.  
