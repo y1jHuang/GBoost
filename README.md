@@ -62,7 +62,7 @@ beta.lasso = as.vector(stats::coef(mdl.lasso, s="lambda.min"))[-1]
 ```
 To search for detailed illustration of these functions, please view [Functions](#Functions)
 
-## Results from Simulation
+## Results from simulation
 
 Finally, label the estimation with each method, and present the results:
 
