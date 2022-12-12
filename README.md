@@ -140,7 +140,7 @@ This function can construct an adjacency matrix that represents the connection b
 
 <img src="https://user-images.githubusercontent.com/115483486/206831134-b9571eaf-a266-4234-92ec-2edc56749187.svg" width="400px"/>
 
-&emsp; $\pmb{\mathsf{PARAMETER}}$  
+&emsp; PARAMETER  
 &emsp; &emsp; `node`: number of brain regions.  
 &emsp; &emsp; `n`: sample size of simulation.  
 &emsp; &emsp; `num.network`: number of networks.  
@@ -149,7 +149,7 @@ This function can construct an adjacency matrix that represents the connection b
 &emsp; &emsp; `dense_g`: number of dense groups, whose edges are all informative.  
 &emsp; &emsp; `effect_size`: size effect of edges.
 
-&emsp; $\pmb{\mathsf{MECHANISM}}$  
+&emsp; MECHANISM  
 &emsp; &emsp; Simulate the data with assigned effect `effect_size = 5`:
 
 $$
@@ -170,7 +170,7 @@ GBoost_fit(data$X, data$Y, data$group, total_steps=5000,
            step_size=c(1e-2,1e-2), adj_var = 999, stop_tol=-1e-5, 
            gamma = 1, lasso_lambda = 0.0314, weighted = 'n')
 ```
-&emsp; $\pmb{\mathsf{PARAMETER}}$  
+&emsp; PARAMETER  
 &emsp; &emsp; `data$X`: the input `X` which contains both adjustment variables and predictors.   
 &emsp; &emsp; `data$Y`: the response variable `Y`.   
 &emsp; &emsp; `data$group`: a factor indicates the group structure of predictors.  
@@ -181,5 +181,5 @@ GBoost_fit(data$X, data$Y, data$group, total_steps=5000,
 &emsp; &emsp; `gamma`: double value used to determine the penalty when using BIC as the stopping criteria   
 &emsp; &emsp; `weighted`: an option to process $\mathbf{X}$. If `'n'`, we normally average edges within each group; if `'lasso'`, we use Lasso algorithm to  identify informative edges, and perform weighted average. `'boosting'` is similar.
 
-&emsp; $\pmb{\mathsf{MECHANISM}}$  
+&emsp; MECHANISM  
 &emsp; &emsp; Please view [#Algorithm](#Algorithm) for detailed information
