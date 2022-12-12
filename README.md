@@ -30,7 +30,7 @@ install.packages('#path/GBoost', repos=NULL, type='source')
 
 Replace `#path` with the folder path where downloaded `GBoost` package located.
 
-## Quick Start
+## Quick start
 
 First, we import `GBoost` package, and simulate data with the assigned effect size `effect_size = 5`:
 
