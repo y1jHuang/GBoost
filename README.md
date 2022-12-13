@@ -95,14 +95,14 @@ As it suggests, given 15 predictors clustered into 3 groups, `GBoost` can perfec
 **Data:** $\lbrace \mathbf x_i, y_i \rbrace ^n_{i=1};$ number of iterations $M_1$ and $M_2$; updating rate $v$  
 **Result:** $\lbrace\lambda_g\rbrace$ and $\lbrace\omega_{j,k}\rbrace$  
 **begin**  
-&emsp; Initialize $\lambda_g = 0 $, $g = 1,...,G$  
+&emsp; Initialize $\lambda_g = 0 $, $g = 1,\cdots,G$  
 &emsp; Calculate the average of edges in sub-network $g$  
-&emsp; **for** $g=1,...,G$ **do**  
+&emsp; **for** $g=1,\cdots,G$ **do**  
 &emsp; &emsp; $\overline{\mathbf X }^{(g)} = m_g^{-1} \sum_{(j,k)\in I_g} \mathbf X^{(j,k)}$  
 &emsp; **end**  
 &emsp; Stage 1 of $L_2$ boosting algorithm:  
-&emsp; **for** $m = 1,...,M_1$ **do**  
-&emsp; &emsp; **for** $g = 1,...,G$ **do**  
+&emsp; **for** $m = 1,\cdots,M_1$ **do**  
+&emsp; &emsp; **for** $g = 1,\cdots,G$ **do**  
 &emsp; &emsp; &emsp; Compute the first partial derivative with respect to $\lambda_g$  
 &emsp; &emsp; &emsp; $L_1(g) = (\pmb{y}-\overline{\mathbf{X}}\pmb{\lambda} )^\intercal \overline{\mathbf{X}}^{(g)} $  
 &emsp; &emsp; **end**  
@@ -115,7 +115,7 @@ As it suggests, given 15 predictors clustered into 3 groups, `GBoost` can perfec
 &emsp; Filter out edges belong to irrelevant networks  
 &emsp; $\mathbf{X} = \lbrace\mathbf{X}^{(j,k)}\rbrace, (j, k) \in S = \bigcup_{g':\lambda_{g'} \neq 0} I_g$  
 &emsp; Stage 2 of $L_2$ boosting algorithm:  
-&emsp; **for** $m = 1,...,M_2$ **do**  
+&emsp; **for** $m = 1,\cdots,M_2$ **do**  
 &emsp; &emsp; **for** $(j,k)\in S$ **do**  
 &emsp; &emsp; &emsp; Compute the first partial derivative with respect to $\omega_{j,k}$  
 &emsp; &emsp; &emsp; $L_1(j, k) = (\pmb{y} - \mathbf{X}\pmb{\omega})^\intercal \mathbf{X}$  
