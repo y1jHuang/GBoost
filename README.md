@@ -173,7 +173,7 @@ GBoost_fit(data$X, data$Y, data$group, total_steps=5000,
 &emsp; PARAMETER  
 &emsp; &emsp; `data$X`: the input `X` which contains both adjustment variables and predictors.   
 &emsp; &emsp; `data$Y`: the response variable `Y`.   
-&emsp; &emsp; `data$group`: a factor indicates the group structure of predictors.  
+&emsp; &emsp; `data$group`: a factor indicates the prior group information of predictors.  
 &emsp; &emsp; `totoal_steps`: the maximum number for iteration.  
 &emsp; &emsp; `step_size`: a vector contains step size $v$ for each stage. Generally, it is better to use small step size, while taking longer time to process.  
 &emsp; &emsp; `adj_var`: a vector indexes the column of adjustment variables. If there are no adjustment variables, set it to `999 `  
