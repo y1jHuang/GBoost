@@ -134,7 +134,7 @@ As it suggests, given 15 predictors clustered into 3 groups, `GBoost` can perfec
 ```R
 # Simulate data that has an underlying group structure.
 simul_group_data(nodes = 6, n = 100, num.network = 2, q.groups = 1,
-                        sparse_g = 0, dense_g = 1, effect_size = 5)
+                 sparse_g = 0, dense_g = 1, effect_size = 5)
 ```
 This function can construct an adjacency matrix that represents the connection between regions. In this example, `nodes = 6` regions can be clustered into `num.network = 2` functional networks due to their similarity. Thus, we can acquire values of $\tbinom{3}{2} = 3$ groups (network pairs) and $\tbinom{6}{2} = 15$ edges (region pairs).
 
