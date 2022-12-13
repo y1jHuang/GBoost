@@ -60,7 +60,7 @@ library(glmnet)
 mdl.lasso = cv.glmnet(data$X, data$Y, alpha=1, parallel = FALSE)
 beta.lasso = as.vector(stats::coef(mdl.lasso, s="lambda.min"))[-1]
 ```
-To search for detailed illustration of these functions, please view [Functions](#Functions)
+To search for detailed illustration of these functions, please view [API Reference](#API Reference)
 
 ## Results from simulation
 
@@ -127,7 +127,7 @@ As it suggests, given 15 predictors clustered into 3 groups, `GBoost` can perfec
 &emsp; **end**  
 **end**
 
-## Functions
+## API Reference
 
 ### For simulation
 
