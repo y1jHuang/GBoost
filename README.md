@@ -2,7 +2,7 @@
 
 ## Introduction
 
-`GBoost` is a package implements variable screening via $L_2$ boosting algorithm in a scalar-on-network regression setting, where the network has underlying group structure. Compared to other linear methods, the algorithm is relatively fast with high performance, and can exploit sparsity in the input matrix `X`.
+`GBoost` is a package that implements variable screening via $L_2$ boosting algorithm in a scalar-on-network regression setting with an underlying group structure. Compared to other linear methods, the algorithm is relatively fast with high performance and favors sparsity in high dimensional problems.
 
 The authors of `GBoost` are Yingjie Huang and Emily L. Morris, who are maintainers as well.
 
@@ -12,7 +12,7 @@ The authors of `GBoost` are Yingjie Huang and Emily L. Morris, who are maintaine
 
 Imports: `Rcpp`, `RcppArmadillo`, `RcppParallel`
 
-To successfully compile `.cpp` files in the package, Intel&reg; `Threading Building Blocks(TBB)` is required. Generally, for `Windows` users, it has already been installed in the system. However, `GNU/Linux` users might have to install Intel&reg; `TBB` on their own, and manually edit `Makevar` file, whose path is `GBoost >> src >> Makevar`:
+To successfully compile `.cpp` files in the package, Intel&reg; `Threading Building Blocks(TBB)` is required. Generally, for `Windows` users, it has already been installed in the system. However, `GNU/Linux` users might have to install Intel&reg; `TBB` on their own, and manually edit the `Makevar` file, whose path is `GBoost >> src >> Makevar`:
 
 ```bash
 PKG_LIBS=$(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS) -L/data/app/intel/tbb/lib/intel64/gcc4.8 -ltbb
@@ -22,17 +22,17 @@ Replace `/data/app/intel/tbb/lib/intel64/gcc4.8` with your own Intel&reg; `TBB`
 
 #### Installation
 
-Please type the following command in R console:
+Please type the following command in the R console:
 
 ```R
 install.packages('#path/GBoost', repos=NULL, type='source')
 ```
 
-Replace `#path` with the folder path where downloaded `GBoost` package located.
+Replace `#path` with the folder path where the downloaded `GBoost` package is located.
 
 ## Quick start
 
-First, we import `GBoost` package, and simulate data with the assigned effect size `effect_size = 5`:
+First, we import the `GBoost` package, and simulate data with the assigned effect size `effect_size = 5`:
 
 ```R
 library(GBoost)
@@ -41,7 +41,7 @@ data = simul_group_data(nodes = 6, n = 100, num.network = 2, q.groups = 1,
                         sparse_g = 0, dense_g = 1, effect_size = 5)
 ```
 
-We then perform estimation with `GBoost_fit()`
+We then perform an estimation with `GBoost_fit()`
 
 ```R
 # Estimation by GBoost
